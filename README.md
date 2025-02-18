@@ -1,23 +1,37 @@
 # Paper Per Year
 
-A UVX command to visualize an academic author's publications per year using data from Google Scholar.
+A command-line tool to visualize an academic author's publications per year using data from Google Scholar.
 
 ## Note
 Numbers are not everything and number of published papers is certainly no metric for academic success.
 
-## Usage
+## Installation
+
+You can run this using uvx without installation.
 
 ```bash
 uvx paper-per-year [OPTIONS] AUTHOR_NAME
 ```
 
+Alternatively, you can install it using pip.
+
+```bash
+[uv] pip install paper-per-year
+```
+
+## Usage
+
+```bash
+paper-per-year [OPTIONS] AUTHOR_NAME
+```
+
 For example:
 ```bash
 # Save plot in current directory with default style
-uvx paper-per-year "Adam Dziedzic"
+paper-per-year "Adam Dziedzic"
 
 # Save plot in a specific directory with custom style
-uvx paper-per-year "Adam Dziedzic" -o ~/Documents/plots --style whitegrid --context poster
+paper-per-year "Adam Dziedzic" -o ~/Documents/plots --style whitegrid --context poster
 ```
 
 
@@ -61,10 +75,10 @@ YEAR    COUNT
 This allows for easy piping to other commands, for example:
 ```bash
 # Get total publication count
-uvx paper-per-year "Adam Dziedzic" | awk '{sum += $2} END {print sum}'
+paper-per-year "Adam Dziedzic" | awk '{sum += $2} END {print sum}'
 
 # Find the most productive year
-uvx paper-per-year "Adam Dziedzic" | sort -k2 -nr | head -n1
+paper-per-year "Adam Dziedzic" | sort -k2 -nr | head -n1
 ```
 
 ## Requirements

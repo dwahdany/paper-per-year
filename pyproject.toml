@@ -38,3 +38,9 @@ paper-per-year = "paper_per_year:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["paper_per_year"]
+
+[tool.hatch.envs.default]
+dependencies = [
+    "bump-version",
+    "ruff",
+]
