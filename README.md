@@ -22,6 +22,11 @@ uvx paper-per-year "Adam Dziedzic"
 uvx paper-per-year "Adam Dziedzic" -o ~/Documents/plots --style whitegrid --context poster
 ```
 
+
+![Example plot for Adam Dziedzic](Adam_Dziedzic.pdf)
+
+
+
 The command will:
 1. Search for authors matching the provided name
 2. Display a list of found authors with their affiliations
