@@ -185,17 +185,4 @@ def process_author(author_name: str, output_dir: str = '.',
     click.secho(f"\nPlot saved as: {output_file}", fg='green')
     
     # Output data
-    print_year_counts(years, counts)
-
-@click.command()
-@click.argument('author_name')
-@click.option('--output-dir', '-o', default='.', help='Output directory for plots')
-@click.option('--style', '-s', default='darkgrid', help='Seaborn plot style')
-@click.option('--context', '-c', default='talk', help='Seaborn plot context')
-def main(author_name: str, output_dir: str = '.', 
-         style: str = 'darkgrid', context: str = 'talk') -> None:
-    """Generate publication plot for a Google Scholar author."""
-    process_author(author_name, output_dir, style, context)
-
-if __name__ == '__main__':
-    main() 
+    print_year_counts(years, counts) 

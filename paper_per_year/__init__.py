@@ -2,4 +2,4 @@
 
 __version__ = "0.1.2"
 
-from .core import main 
+from .cli import main 
