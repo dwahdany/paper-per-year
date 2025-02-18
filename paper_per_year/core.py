@@ -3,6 +3,7 @@
 import sys
 import os
 from typing import List, Tuple, Optional
+from pathlib import Path
 
 import numpy as np
 from scholarly import scholarly
@@ -101,7 +102,7 @@ def get_publication_years(author: dict) -> Tuple[np.ndarray, np.ndarray]:
 
 def create_plot(years: np.ndarray, counts: np.ndarray, author_name: str,
                style: str = 'darkgrid', context: str = 'talk') -> None:
-    """Create publication plot.
+    """Create publication count plot.
     
     Args:
         years: Array of years
@@ -110,20 +111,35 @@ def create_plot(years: np.ndarray, counts: np.ndarray, author_name: str,
         style: Seaborn style
         context: Seaborn context
     """
-    sns.set_style(style)
-    sns.set_context(context)
+    # Reset any existing style
+    plt.style.use('default')
+    sns.reset_defaults()
     
-    plt.figure(figsize=(12, 6))
-    ax = sns.barplot(x=years, y=counts, color=sns.color_palette("husl", 8)[0])
+    # Set the style and context
+    sns.set_theme(style=style, context=context)
     
-    plt.title(f'Publications per Year - {author_name}', pad=20)
-    plt.xlabel('Year', labelpad=10)
-    plt.ylabel('Number of Publications', labelpad=10)
+    # Create figure with dark background if using dark style
+    fig = plt.figure(figsize=(12, 6), dpi=300)
+    if style in ['dark', 'darkgrid']:
+        fig.patch.set_facecolor('#2e3440')
+        plt.gca().set_facecolor('#2e3440')
     
+    # Create the plot
+    ax = sns.barplot(x=years, y=counts)
+    
+    # Adjust text color for dark themes
+    text_color = 'white' if style in ['dark', 'darkgrid'] else 'black'
+    
+    # Add count labels on top of each bar
     for i, v in enumerate(counts):
-        ax.text(i, v, str(v), ha='center', va='bottom')
+        ax.text(i, v, str(v), ha='center', va='bottom', color=text_color)
     
-    plt.xticks(rotation=45)
+    plt.title(f"Publications per Year - {author_name}", color=text_color)
+    plt.xlabel("Year", color=text_color)
+    plt.ylabel("Number of Publications", color=text_color)
+    plt.xticks(rotation=45, color=text_color)
+    plt.yticks(color=text_color)
+    
     plt.tight_layout()
 
 def save_plot(output_dir: str, author_name: str) -> str:
@@ -136,8 +152,9 @@ def save_plot(output_dir: str, author_name: str) -> str:
     Returns:
         str: Path to saved file
     """
-    output_file = os.path.join(output_dir, f"{author_name.replace(' ', '_')}.pdf")
-    plt.savefig(output_file, bbox_inches='tight', dpi=300)
+    output_file = Path(output_dir) / f"{author_name.replace(' ', '_')}.pdf"
+    plt.savefig(output_file)
+    plt.close()  # Clean up
     return output_file
 
 def print_year_counts(years: np.ndarray, counts: np.ndarray) -> None:
