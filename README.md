@@ -2,6 +2,9 @@
 
 A UVX command to visualize an academic author's publications per year using data from Google Scholar.
 
+## Note
+Numbers are not everything and number of published papers is certainly no metric for academic success.
+
 ## Installation
 
 1. Clone this repository
