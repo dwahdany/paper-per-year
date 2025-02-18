@@ -1,9 +1,9 @@
 name: Publish to PyPI
 
 on:
-  release:
-    types: [published]
-
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags
 jobs:
   publish:
     runs-on: ubuntu-latest
