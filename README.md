@@ -5,11 +5,6 @@ A UVX command to visualize an academic author's publications per year using data
 ## Note
 Numbers are not everything and number of published papers is certainly no metric for academic success.
 
-## Installation
-
-1. Clone this repository
-2. Add the `bin` directory to your PATH or create a symlink to `bin/uvx-paper-per-year` in a directory that's in your PATH
-
 ## Usage
 
 ```bash
